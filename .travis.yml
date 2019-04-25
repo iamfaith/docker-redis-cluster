@@ -9,9 +9,6 @@ env:
   - REDIS_VERSION=4.0.13
   - REDIS_VERSION=5.0.3
 script:
-  docker build --build-arg redis_version=$REDIS_VERSION -t xianzixiang/redis-cluster .
-deploy:
-  provider: script
-  script: bash docker_push.sh
-  on:
-    branch: master
+  - docker build --build-arg redis_version=$REDIS_VERSION -t xianzixiang/redis-cluster .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push xianzixiang/redis-cluster
