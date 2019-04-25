@@ -10,3 +10,7 @@ env:
   - REDIS_VERSION=5.0.3
 script:
   docker build --build-arg redis_version=$REDIS_VERSION -t xianzixiang/redis-cluster .
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push xianzixiang/redis-cluster;
