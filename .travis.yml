@@ -12,6 +12,6 @@ script:
   docker build --build-arg redis_version=$REDIS_VERSION -t xianzixiang/redis-cluster .
 deploy:
   provider: script
-  script: bash docker_push
+  script: bash docker_push.sh
   on:
     branch: master
